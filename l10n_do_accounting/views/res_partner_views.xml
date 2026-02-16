@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="l10n_do_accounting_view_partner_form" model="ir.ui.view">
+        <field name="name">l10n.do.accounting.view.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Odoo 17: no attrs/ref/bool. Usar campo related o dotted country code -->
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <!-- Oculta el VAT estándar cuando el país es DO -->
+                <attribute name="invisible">l10n_do_country_code == 'DO'</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <!-- Asegura que los campos usados en modifiers existan en la vista -->
+                <field name="l10n_do_country_code" invisible="1"/>
+                <field name="is_fiscal_info_required" invisible="1"/>
+
+                <!-- RNC para compañías (DO) -->
+                <field name="vat"
+                       string="RNC"
+                       placeholder="ej. NNNNNNNNN"
+                       readonly="parent_id != False"
+                       invisible="(l10n_do_country_code != 'DO') or (is_company == False)"
+                       required="is_fiscal_info_required"/>
+
+                <!-- Cédula para personas (DO) -->
+                <field name="vat"
+                       string="Cédula"
+                       placeholder="ej. NNNNNNNNNNN"
+                       readonly="parent_id != False"
+                       invisible="(l10n_do_country_code != 'DO') or (is_company == True)"
+                       required="is_fiscal_info_required"/>
+            </xpath>
+
+            <group name="sale" position="inside">
+                <field name="sale_fiscal_type_id"/>
+            </group>
+
+            <group name="purchase" position="inside">
+                <field name="expense_type"/>
+                <field name="purchase_fiscal_type_id"/>
+            </group>
+
+        </field>
+    </record>
+
+    <!-- Search view: ok -->
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">ncf.res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="name"
+                       filter_domain="['|','|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self),('vat','ilike',self)]"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Company form inherit: solo widget, sin modifiers -->
+    <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">ncf_manager company form inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="widget">dgii_autocomplete</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

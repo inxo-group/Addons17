@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_account_form_inherited_dgii_boxes" model="ir.ui.view">
+        <field name="name">account.account.form.inherited.dgii.boxes</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="DGII">
+                    <group>
+                        <field name="box_attachment_a"/>
+                        <field name="box_it1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

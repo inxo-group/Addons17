@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="field_dgii_autocomplete" name="Field DGII Autocomplete">
+        <t t-name="FieldDgiiAutoComplete">
+            <t t-if="widget.mode !== 'readonly'">
+                <div class="input-group">
+                    <input type="text" t-att-value="widget.value or ''" class="o_input form-control" autocomplete="off"/>
+                    <span class="input-group-text">
+                        <i class="fa fa-search"/>
+                    </span>
+                </div>
+            </t>
+            <t t-else="">
+                <span t-esc="widget.value"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

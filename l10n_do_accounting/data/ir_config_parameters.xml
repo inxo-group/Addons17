@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="query_dgii_parameter" model="ir.config_parameter" forcecreate="0">
+            <field name="key">dgii.wsmovil</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

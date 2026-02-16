@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="action_open_debit_note_wizard" model="ir.actions.act_window">
+            <field name="name">Create Debit Note</field>
+            <field name="res_model">account.debit.note.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'active_model': 'account.move'}</field>
+        </record>
+
+        <record id="view_account_debit_note_wizard_form" model="ir.ui.view">
+            <field name="name">account.debit.note.wizard.form</field>
+            <field name="model">account.debit.note.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Debit Note">
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                        <field name="date"/>
+                        <field name="journal_id" options="{'no_create': False}" domain="[('company_id','=',company_id), ('type','in',['sale','purchase'])]"/>
+                        <field name="copy_lines"/>
+                        <field name="dgii_debit_note_reason" required="1"/>
+                        <field name="reason" placeholder="Describe el motivo (mora, flete, recargo, etc.)"/>
+                    </group>
+                    <footer>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                        <button string="Create Debit Note" type="object" name="action_create_debit_note" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

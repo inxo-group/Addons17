@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form_opengeek_einvoice" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.opengeek.einvoice</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Inserta una nueva app_settings_block dentro del form -->
+                <xpath expr="//form" position="inside">
+                    <app name="opengeek_einvoice" string="E-Invoice">
+                        <block title="Conector de Facturación Electrónica">
+                            <setting string="Credenciales" help="Configuración de integración con OpenGeeksLab SRL">
+                                <div class="content-group">
+                                    <div class="row mt16 o_settings_container">
+                                        <div class="col-12 col-lg-6 o_setting_box">
+                                            <div class="o_setting_left_pane"/>
+                                            <div class="o_setting_right_pane">
+                                                <label for="e_expiration_token"/>
+                                                <div class="text-muted">Expiración del token</div>
+                                                <field name="e_expiration_token" readonly="1"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 o_setting_box">
+                                            <div class="o_setting_left_pane"/>
+                                            <div class="o_setting_right_pane">
+                                                <label for="e_username"/>
+                                                <div class="text-muted">Usuario</div>
+                                                <field name="e_username"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 o_setting_box">
+                                            <div class="o_setting_left_pane"/>
+                                            <div class="o_setting_right_pane">
+                                                <label for="e_password"/>
+                                                <div class="text-muted">Contraseña</div>
+                                                <field name="e_password" password="True"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

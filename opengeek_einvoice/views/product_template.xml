@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_template_form_view_inherited" model="ir.ui.view">
+            <field name="name">product.template.form.inherited.opengeek</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='detailed_type']" position="after">
+                    <field name="is_service_computed" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

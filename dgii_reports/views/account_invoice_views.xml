@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="invoice_form_inherited" model="ir.ui.view">
+        <field name="name">account.move.form.inherited.dgii</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page name="dgii_fields" string="DGII" groups="account.group_account_user" invisible="move_type not in ('out_invoice','out_refund','in_invoice','in_refund')">
+
+                    <group invisible="move_type not in ('out_invoice','out_refund')">
+                        <group string="Withholding" groups="account.group_account_manager">
+                            <field name="payment_date"/>
+                            <field name="withholding_itbis"/>
+                            <field name="income_withholding"/>
+                        </group>
+
+                        <group string="Taxes" groups="account.group_account_manager">
+                            <field name="invoiced_itbis"/>
+                            <field name="selective_tax"/>
+                            <field name="other_taxes"/>
+                            <field name="legal_tip"/>
+                        </group>
+
+                        <group string="607">
+                            <field name="fiscal_status" widget="state_selection" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group invisible="move_type not in ('in_invoice','in_refund')">
+                        <group string="Taxes" groups="account.group_account_manager">
+                            <field name="invoiced_itbis"/>
+                            <field name="proportionality_tax"/>
+                            <field name="cost_itbis"/>
+                            <field name="advance_itbis"/>
+                            <field name="selective_tax"/>
+                            <field name="other_taxes"/>
+                            <field name="legal_tip"/>
+                        </group>
+
+                        <group string="Invoicing" groups="account.group_account_manager">
+                            <field name="payment_date"/>
+                            <field name="payment_form"/>
+                            <field name="service_total_amount"/>
+                            <field name="good_total_amount"/>
+                        </group>
+
+                        <group string="Withholding" groups="account.group_account_manager">
+                            <field name="withholding_itbis"/>
+                            <field name="isr_withholding_type"/>
+                            <field name="income_withholding"/>
+                        </group>
+
+                        <group string="606">
+                            <field name="fiscal_status" widget="state_selection"/>
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="invoice_tree_inherited" model="ir.ui.view">
+        <field name="name">account.move.tree.inherited.dgii</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="fiscal_status" widget="state_selection" readonly="1" groups="account.group_account_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="l10n_do_accounting_view_move_form_inherit" model="ir.ui.view">
+        <field name="name">l10n.do.accounting.view.move.form.inherit.dgii</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_do_accounting.view_move_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expense_type']" position="after">
+                <field name="is_exterior" invisible="1"/>
+                <field name="service_type" invisible="not is_exterior" required="is_exterior"/>
+                <field name="service_type_detail" options="{'no_create': True, 'no_open': True}" invisible="not is_exterior" readonly="not service_type" required="service_type"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_fiscal_type_form_inherit_opengeek" model="ir.ui.view">
+            <field name="name">account.fiscal.type.form.inherit.opengeek</field>
+            <field name="model">account.fiscal.type</field>
+            <field name="inherit_id" ref="l10n_do_accounting.account_fiscal_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="is_electronic_sequence"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

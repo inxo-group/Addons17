@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dgii_reports_rule" model="ir.rule">
+        <field name="name">DGII Reports multi-company</field>
+        <field name="model_id" ref="model_dgii_reports"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="dgii_reports_purchase_line_rule" model="ir.rule">
+        <field name="name">DGII Purchase Lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_purchase_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="dgii_reports_sale_line_rule" model="ir.rule">
+        <field name="name">DGII Sale Lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_sale_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="dgii_reports_cancel_line_rule" model="ir.rule">
+        <field name="name">DGII Cancel Lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_cancel_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="dgii_reports_exterior_line_rule" model="ir.rule">
+        <field name="name">DGII Exterior Lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_exterior_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="dgii_reports_it1_line_rule" model="ir.rule">
+        <field name="name">DGII IT1 Lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_it1_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

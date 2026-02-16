@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="e_report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='payment_communication']" position="after">
+
+            <t t-if="o.currency_id != o.company_id.currency_id and o.move_type in ['out_invoice', 'out_refund']">
+                <div>
+                    <strong>Moneda:</strong>
+                    <span t-esc="o.currency_id.name"/>
+                </div>
+                <div>
+                    <strong>Tasa de Cambio:</strong>
+                    <span t-esc="o.currency_rate"/>
+                </div>
+            </t>
+
+            <div id="qrcode" t-if="o.move_type in ['out_invoice', 'out_refund']">
+                <t t-if="o.dgii_qr_image">
+                    <div>
+                        <img t-att-src="image_data_uri(o.dgii_qr_image)" style="max-width: 150px; max-height: 150px;"/>
+                    </div>
+                </t>
+
+                <div>
+                    <strong>Código de Seguridad:</strong>
+                    <span t-field="o.dgii_codigo_seguridad"/>
+                </div>
+                <div>
+                    <strong>Fecha de Firma Digital:</strong>
+                    <span t-field="o.dgii_fecha_firma"/>
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>
